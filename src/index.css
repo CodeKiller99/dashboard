@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* RESET GLOBAL */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* FORZAR MODO CLARO (evita que todo se vea oscuro) */
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  color: #111827; /* gris oscuro */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ROOT LIMPIO */
+#root {
+  min-height: 100vh;
+}
+
+/* HEADINGS */
+h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+/* TEXTO */
+p {
+  margin: 0;
+}
+
+/* EVITA HERENCIAS RARAS */
+a {
+  text-decoration: none;
+  color: inherit;
+}
