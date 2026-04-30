@@ -1,20 +1,22 @@
-// components/Chart.jsx
-import { LineChart, Line, XAxis, YAxis, Tooltip } from "recharts";
+import {
+    BarChart,
+    Bar,
+    XAxis,
+    YAxis,
+    Tooltip,
+    ResponsiveContainer,
+} from "recharts";
 
-const data = [
-    { name: "Ene", users: 30 },
-    { name: "Feb", users: 50 },
-    { name: "Mar", users: 80 },
-];
-
-function Chart() {
+function Chart({ data }) {
     return (
-        <LineChart width={400} height={300} data={data}>
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Line type="monotone" dataKey="users" />
-        </LineChart>
+        <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={data}>
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Bar dataKey="posts" radius={[6, 6, 0, 0]} />
+            </BarChart>
+        </ResponsiveContainer>
     );
 }
 
