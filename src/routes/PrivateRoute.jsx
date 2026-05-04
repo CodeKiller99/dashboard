@@ -1,10 +1,20 @@
 // routes/PrivateRoute.jsx
 import { Navigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
-function PrivateRoute({ children }) {
-    const isAuth = localStorage.getItem("user");
+function PrivateRoute({ children, roles }) {
+    const { user, loading } = useAuth();
 
-    return isAuth ? children : <Navigate to="/" />;
+    if (loading) return <p>Cargando...</p>;
+
+    if (!user) return <Navigate to="/login" />;
+
+    // 🔥 CONTROL DE ROLES
+    if (roles && !roles.includes(user.role)) {
+        return <Navigate to="/dashboard" />;
+    }
+
+    return children;
 }
 
 export default PrivateRoute;

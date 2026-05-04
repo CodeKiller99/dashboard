@@ -1,9 +1,20 @@
 import { useState, useRef, useEffect } from "react";
 import { User, LogOut, Settings } from "lucide-react";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
     const [open, setOpen] = useState(false);
     const dropdownRef = useRef();
+
+    const { logout, user } = useAuth();
+    const navigate = useNavigate();
+
+
+    const handleLogout = () => {
+        logout();
+        navigate("/login");
+    };
 
     // cerrar al hacer click fuera
     useEffect(() => {
@@ -44,6 +55,20 @@ function Navbar() {
                 {open && (
                     <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border p-2 z-50 animate-fade-in">
 
+                        <span className="flex items-center gap-2 w-full px-3 py-2">
+                            {user?.email}
+                        </span>
+
+                        <span className="flex items-center gap-2 w-full px-3 py-2 text-gray-400">
+                            {user?.role}
+                        </span>
+
+                        {user?.role === "admin" && (
+                            <button className="text-sm text-blue-500">
+                                Panel Admin
+                            </button>
+                        )}
+
                         <button className="flex items-center gap-2 w-full px-3 py-2 rounded-lg hover:bg-gray-100">
                             <Settings size={16} />
                             Configuración
@@ -56,8 +81,10 @@ function Navbar() {
 
                         <hr className="my-2" />
 
-                        <button className="flex items-center gap-2 w-full px-3 py-2 rounded-lg hover:bg-red-100 text-red-600">
-                            <LogOut size={16} />
+                        <button
+                            onClick={handleLogout}
+                            className="flex items-center gap-2 w-full px-3 py-2 rounded-lg hover:bg-red-100 text-red-600"
+                        >
                             Cerrar sesión
                         </button>
 
